@@ -28,22 +28,22 @@ def msg(q, channel, tn):
 def handler(tn,HOST,nick,realname,IDENT,line):
 	try:
 		#from ircbot_Events import Events
-		import ircbot_Events
+		import ircbot_Events, ircbot_Commands
+		import commands, sys
 		x = ircbot_Events.Events()
+		cmd = ircbot_Commands.command_handler()
 		lineinfo = x.conversation(line)
 		channel = lineinfo["Channel"]
 		nick = lineinfo["Nick"]
 		message = lineinfo["Msg"]
 		print "%(channel)s%(nick)s: %(message)s" %locals()
-		if x.msg_found("Hello", message) == True:
-			Reply = "Hello " + nick
-			msg(Reply, channel, tn)
-		if x.msg_found("!Reload", message) == True:
-			reload(ircbot_Events)
-			#reload(ircbot_handler)
-			
 		
+		commands_list = ['Hello', '!uptime','!date']
+		for item in commands_list:
+			if x.msg_found(item, message):
+				cmd.commandi(nick, channel, message, tn, msg, x)			
 		if "+x" in line:
 			tn.write("JOIN #linux\n")
 	except:
+		print "Unexpected error:", sys.exc_info()[0]
 		print "Error!!!"

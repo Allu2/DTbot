@@ -40,4 +40,6 @@ class Events:
 			channel = line.split(' ')[2] + ' '
 		info = {"Nick": name, "Channel":channel, "Msg":message}
 		return info
+	
+	
 
