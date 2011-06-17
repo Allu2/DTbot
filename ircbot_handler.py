@@ -25,19 +25,26 @@
 def msg(q, channel, tn):
 	tn.write ("PRIVMSG " + channel + " :" + q + "\n\r" )
 
-def handler(tn,HOST,nick,realname,IDENT,line):
-	try:
-		#from ircbot_Events import Events
+def handler(tn,HOST,nick,realname,IDENT,line, c, s):
+
+	import ircbot_Events, ircbot_Commands
+	import commands, sys
+	if c  == True:
 		import ircbot_Events, ircbot_Commands
 		import commands, sys
 		reload(ircbot_Events)
 		reload(ircbot_Commands)
-		x = ircbot_Events.Events()
-		cmd = ircbot_Commands.command_handler()
-		lineinfo = x.conversation(line)
-		channel = lineinfo["Channel"]
-		nick = lineinfo["Nick"]
-		message = lineinfo["Msg"]
+	x = ircbot_Events.Events()
+	cmd = ircbot_Commands.command_handler()
+	lineinfo = x.conversation(line)
+	channel = lineinfo["Channel"]
+	nick = lineinfo["Nick"]
+	message = lineinfo["Msg"]
+	if c == True:
+		x.debug("Reloaded Events and Commands.")
+	try:
+		#from ircbot_Events import Events
+
 		print "%(channel)s%(nick)s: %(message)s" %locals()
 		
 		commands_list = ['Hello','!uptime','!date']

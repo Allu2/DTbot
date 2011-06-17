@@ -23,7 +23,8 @@
 #       
 
 class Events:
-	
+	def debug(self, msg):
+		print "[DEBUG]: " + msg
 	def msg_found(self, msg, message):
 		if msg in message:
 			return True
