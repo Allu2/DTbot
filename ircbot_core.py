@@ -3,7 +3,7 @@ import telnetlib
 import ircbot_handler
 
 #Variables
-HOST = 'irc.unilang.org'
+HOST = '' #server here
 PORT = 6667
 nick = "Allu2_Bot"
 realname = "IrcBot by allu2"
